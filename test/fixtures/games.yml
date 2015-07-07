@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  seller: MyString
+  player: MyString
+  secret_word: MyString
+  letters_guessed: MyString
+
+two:
+  seller: MyString
+  player: MyString
+  secret_word: MyString
+  letters_guessed: MyString
