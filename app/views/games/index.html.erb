@@ -6,17 +6,7 @@
     <input type='text' name = "game[word]"> 
     <button>Submit</button>
   <% end %>
-<p> 
-    <% @players.each do |player| %>
-    <ul>
-    <% if player != current_user%>
-      <li>
-        <%= player.email %>
-        <% end %>
-      </li>
-    </ul>
-    <% end %>
- </p>
+
 
 <h3>Enter a word to challenge your friend</h3>
 <% bootstrap_form_for @game do |f| %>
