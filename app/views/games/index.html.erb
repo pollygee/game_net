@@ -1,1 +1,13 @@
-<h1>This is the index action on the games controller</h1>
+<h1>Hangman Game</h1>
+
+<h3>Choose a person to challenge with your word</h3>
+
+<p> 
+    <% @players.each do |player| %>
+    <ul>
+      <li>
+        <%= player.email %>
+      </li>
+    </ul>
+    <% end %>
+ </p>
