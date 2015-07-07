@@ -3,4 +3,7 @@ class GamesController < ApplicationController
     @players = User.all
     @game = Game.new
   end
+
+  def create
+  end
 end

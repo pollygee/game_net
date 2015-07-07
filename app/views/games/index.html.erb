@@ -1,7 +1,11 @@
 <h1>Hangman Game</h1>
 
 <h3>Choose a person to challenge with your word</h3>
-
+  <%= form_tag games_path do %>
+    <%= collection_select :game, :player_id, User.all, :id, :username %>
+    <input type='text' name = "game[word]"> 
+    <button>Submit</button>
+  <% end %>
 <p> 
     <% @players.each do |player| %>
     <ul>
