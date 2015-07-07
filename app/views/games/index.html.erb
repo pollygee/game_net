@@ -5,9 +5,17 @@
 <p> 
     <% @players.each do |player| %>
     <ul>
+    <% if player != current_user%>
       <li>
         <%= player.email %>
+        <% end %>
       </li>
     </ul>
     <% end %>
  </p>
+
+<h3>Enter a word to challenge your friend</h3>
+<% bootstrap_form_for @game do |f| %>
+  <%= f.text_field :secret_word %>
+  <%end%>
+ <button type = "button" class = "btn btn-primary"> Submit Word!</button>
