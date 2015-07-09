@@ -23,6 +23,7 @@ class GamesController < ApplicationController
     @suggester = @current_game.suggester.username
     @letters_guessed = @current_game.letters_guessed
     h = Hangman.new secret_word 
+
     @secret_letters = secret_word.split("")
     @guess_word = @secret_letters.map do |letter|
       if @letters_guessed.nil? || (@letters_guessed.exclude? letter)
@@ -31,6 +32,15 @@ class GamesController < ApplicationController
         letter
       end
     end
+    #gather how many guesses we've done so far and pass into lost?
+    if h.lost? 
+      flash[:notice] = "You are out of guesses.  You lost the game! The word was #{secret_word}."
+      redirect_to games_path
+    elsif h.won? @guess_word
+      flash[:notice] = "You have guessed the word #{secret_word}.  Well done."
+      redirect_to games_path
+    end
+     
   end
 
   def guess

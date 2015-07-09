@@ -3,19 +3,18 @@ class Hangman
   def initialize word
       @word = word.strip 
       #@tries = 3
-
-      @guess_word = []
+      # @guess_word = []
       #should map here...
-      (@word.length).times do |blank|
-        @guess_word << "__ "
-      end
+      # (@word.length).times do |blank|
+      #   @guess_word << "__ "
+      # end
   end
 
   def over?
     @tries <=0 || @guess_word.join == @word
   end
-  def won?
-    @guess_word.join == @word
+  def won? guess_word
+    guess_word.join == @word
   end
 
   def lost?
