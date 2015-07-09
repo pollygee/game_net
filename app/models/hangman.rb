@@ -1,11 +1,9 @@
-class HangmanGame
+class Hangman 
   attr_reader :tries, :word, :guess_word
-  def initialize
-      words = File.read("words.txt").lines
-      #chose a random word from words.txt
-      #@word = words.sample.strip
-      @word = words.sample.strip #just for dev so I know what the word id
-      @tries = 3
+  def initialize word
+      @word = word.strip 
+      #@tries = 3
+
       @guess_word = []
       #should map here...
       (@word.length).times do |blank|

@@ -1,15 +1,19 @@
-<h1>Hangman Game</h1>
+<center><h1>Hangman Game</h1></center>
 
-<h3>Choose a person to challenge with your word</h3>
+<h2>Want to Challenge a Friend?</h2>
+<h3>Choose a person and enter your word</h3>
   <%= form_tag games_path do %>
-    <%= collection_select :game, :player_id, User.all, :id, :username %>
+    <%= collection_select :game, :player_id, @players, :id, :username %>
     <input type='text' name = "game[word]"> 
-    <button>Submit</button>
+    <button class = "btn btn-primary">Submit</button>
   <% end %>
 
-
-<h3>Enter a word to challenge your friend</h3>
-<% bootstrap_form_for @game do |f| %>
-  <%= f.text_field :secret_word %>
-  <%end%>
- <button type = "button" class = "btn btn-primary"> Submit Word!</button>
+<h2>Ready to Play?  Accept a challenge from ...</h2>
+<ul><%@games.each do |game|%>
+    <li><% if game.suggester_id != current_user.id%>
+        <% name = User.find(game.suggester_id).username%>
+        <%= link_to "#{name}", game %>
+        <%end%>
+    <%end%>
+    </li>
+</ul>
