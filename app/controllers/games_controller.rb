@@ -33,7 +33,7 @@ class GamesController < ApplicationController
       end
     end
     #gather how many guesses we've done so far and pass into lost?
-    if h.lost? 
+    if h.lost? @current_game.letters_guessed.split("")
       flash[:notice] = "You are out of guesses.  You lost the game! The word was #{secret_word}."
       redirect_to games_path
     elsif h.won? @guess_word

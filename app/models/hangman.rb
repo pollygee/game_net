@@ -17,8 +17,10 @@ class Hangman
     guess_word.join == @word
   end
 
-  def lost?
-    @tries == 0
+  def lost? guess_word
+    bad_guesses = guess_word.delete_if {|letter| word.include?(letter)}
+    tries = bad_guesses.count
+    tries >= 6
   end
   def compare guess_letter
     #@guesses -= 1
