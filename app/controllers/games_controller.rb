@@ -9,11 +9,7 @@ class GamesController < ApplicationController
     @player_id = params['game']['player_id'].to_i
     @secret_word = params['game']['word']
     g = Game.create! player_id: @player_id, suggester_id: current_user.id, secret_word: @secret_word
-    if g.save
-      redirect_to games_path
-    else
-      redirect_to "www.google.com"
-    end
+    redirect_to games_path
   end
 
   def get_games
@@ -29,13 +25,22 @@ class GamesController < ApplicationController
     h = Hangman.new secret_word 
     @secret_letters = secret_word.split("")
     @guess_word = @secret_letters.map do |letter|
-      if @letters_guess.nil? || (@letters_guess.exclude? letter)
+      if @letters_guessed.nil? || (@letters_guessed.exclude? letter)
         "__"
       else
         letter
       end
     end
-    
+  end
+
+  def guess
+    guess_letter = params["guess_letter"]
+    g = Game.find(params["game_id"])
+    old_letters_guessed = g.letters_guessed
+    new_letters_guessed = old_letters_guessed << guess_letter
+    g.update!(letters_guessed: new_letters_guessed)
+    redirect_to game_path(g)
+
   end
 
   private

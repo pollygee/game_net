@@ -6,3 +6,11 @@ html
     h1 Hangman
     h3 Specially designed for you by  #{@suggester}
     p  "#{@guess_word}"
+
+    h3 Letters you have guessed before:
+    //display each letter that has already been guessed
+    h2 Guess a letter =>
+    = form_tag game_guess_path(@current_game), class: 'letter_submit' do
+      = text_field_tag :guess_letter 
+      button Guess 
+
