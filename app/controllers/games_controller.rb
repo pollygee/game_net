@@ -13,7 +13,7 @@ class GamesController < ApplicationController
   end
 
   def get_games
-    @games = @games = Game.where(player_id = current_user)
+    @games = Game.where(player_id: current_user)
     @t = @games.map{|g| User.find(g.suggester_id).username}
   end
 
@@ -22,26 +22,17 @@ class GamesController < ApplicationController
     secret_word = @current_game.secret_word
     @suggester = @current_game.suggester.username
     @letters_guessed = @current_game.letters_guessed
-    h = Hangman.new secret_word 
-
-    @secret_letters = secret_word.split("")
-
-    @guess_word = @secret_letters.map do |letter|
-      if @letters_guessed.nil? || (@letters_guessed.exclude? letter)
-        "__"
-      else
-        letter
+    h = Hangman.new secret_word, @letters_guessed
+    @guess_word = h.guess_word
+      if h.lost? @current_game.letters_guessed
+        # @bad_guess_letters = @current_game.letters_guessed
+        flash[:notice] = "You are out of guesses.  You lost the game! The word was #{secret_word}."
+        redirect_to games_path
+      elsif h.won? @guess_word
+        # @bad_guess_letters = @current_game.letters_guessed
+        flash[:notice] = "You have guessed the word #{secret_word}.  Well done."
+        redirect_to games_path
       end
-    end
-    @bad_guess_letters = @current_game.letters_guessed
-    if h.lost? @current_game.letters_guessed.split("")
-      flash[:notice] = "You are out of guesses.  You lost the game! The word was #{secret_word}."
-      redirect_to games_path
-    elsif h.won? @guess_word
-      flash[:notice] = "You have guessed the word #{secret_word}.  Well done."
-      redirect_to games_path
-    end
-     
   end
 
   def guess

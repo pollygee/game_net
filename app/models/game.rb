@@ -5,4 +5,7 @@ class Game < ActiveRecord::Base
   # def initialize 
   #   self.letters_guessed = ""
   # end
+  def hangman
+    Hangman.new(secret_word, letters_guessed)
+  end
 end

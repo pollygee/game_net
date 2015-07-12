@@ -11,11 +11,14 @@
   <% end %>
 
 <h2>Ready to Play?  Accept a challenge from ...</h2>
-<ul><%@games.each do |game|%>
-    <li><% if game.suggester_id != current_user.id%>
-        <% name = User.find(game.suggester_id).username%>
-        <%= link_to "#{name}", game %>
-        <%end%>
+<ul>
+  <%@games.each do |game|%>
+    <% next if game.hangman.over? %>
+    <% if game.suggester_id != current_user.id%>
+        <li>
+          <% name = User.find(game.suggester_id).username%>
+          <%= link_to "#{name}", game %>
+        </li>
     <%end%>
-    </li>
+  <%end%>
 </ul>
