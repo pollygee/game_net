@@ -21,7 +21,11 @@ class Hangman
   end
 
   def won? guess_word=@word
-    @letters_guessed.include? @word
+    uniq_letters_needed = @word.split(//).uniq
+    uniq_letters_available = @letters_guessed.split(//).uniq
+    diff = uniq_letters_needed - uniq_letters_available
+    diff.count == 0
+
   end
 
   def lost? guess_word=@word
