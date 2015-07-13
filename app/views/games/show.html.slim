@@ -4,11 +4,11 @@ html
     title Hangman Game
   body
     h1 Hangman
-    h3 Specially designed for you by  #{@suggester}
-    p  "#{@guess_word}"
+    h3  "#{@guess_word}"
+    h4 Specially designed for you by  #{@suggester}
 
-    h3 Letters you have guessed before:
-    = @bad_guess_letters
+    h3 Letters you have already guessed:
+    h4  "#{@letters_guessed.split(//).uniq.sort}"
 
     h2 Guess a letter =>
     = form_tag game_guess_path(@current_game), class: 'letter_submit' do
