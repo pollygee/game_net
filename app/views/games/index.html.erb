@@ -15,10 +15,10 @@
   <%@games.each do |game|%>
     <% next if game.hangman.over? %>
     <% if game.suggester_id != current_user.id%>
-        <li>
+        <h3><span + span {margin-left: 10px}>
           <% name = User.find(game.suggester_id).username%>
           <%= link_to "#{name}", game %>
-        </li>
+        </span></h3>
     <%end%>
   <%end%>
 </ul>

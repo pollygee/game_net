@@ -42,15 +42,4 @@ class Hangman
     end
   end
 
-  # def compare guess_letter
-  #   word_array = @word.strip.split(//)
-  #   if word_array.include? guess_letter
-  #     puts 'Good guess'
-  #     match_index = word_array.each_index.select{|i| word_array[i] == guess_letter }
-  #     match_index.each do |index|
-  #       @guess_word[index] = guess_letter
-  #     end
-  #   end
-  # end
-
 end
